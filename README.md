@@ -4,8 +4,8 @@
 
 | Name Surname (initials) | GUID                                     |
 | ----------------------- | ---------------------------------------- |
-| MP                      | ``                                 |
-| MS                      | `` |
+| MP                      | `01e159af-4124-4c3e-bcdf-50dd80c893b9`   |
+| MS                      | `e7e52d02-af97-4a39-8b51-0a6180b22eaa` |
 
 ## Create a repository checklist
 
