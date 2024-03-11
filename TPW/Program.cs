@@ -1,20 +1,23 @@
-﻿internal class Program
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TPW
 {
-    private static void Main(string[] args)
+    public class Program
     {
-        string a;
-        Console.WriteLine("type an all number string to convert it to int or ingame to get true'd");
-        a = Console.ReadLine();
-        Console.WriteLine(a);
-        Console.WriteLine(Equals(a, "ingame"));
-        int.TryParse(a, out int b);
-        if (b == 0)
+        public static void Main(string[] args)
         {
-            Console.WriteLine("That is not an all number string");
-        }
-        else
-        {
-            Console.WriteLine(b);
+            string a;
+            Console.WriteLine("type an all number string to convert it to int or ingame to get true'd");
+            a = Console.ReadLine();
+            Console.WriteLine(a);
+            Console.WriteLine(Equals(a, "ingame"));
+            Conv conv = new Conv();
+            conv.StringConv(a);
         }
     }
 }
+
