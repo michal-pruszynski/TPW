@@ -28,6 +28,7 @@ ETAP - 1
 - [ ] Unit Test - layers are tested independently using abstract API
 - [ ] Dependency injection (additional framework is not required)
 - [ ] Mock is used for testing purposes (expected but not required)
+
 ETAP - 0
 - [X] the task provides required feedback and has been submitted (needs grading)
 - [X] the ability to clone the repository to the teacher's computer
