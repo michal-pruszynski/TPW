@@ -11,7 +11,7 @@
 ETAP - 1
 - [X] text is in C#
 - [X] build succeeded
-- [ ] all UT are green
+- [X] all UT are green
 - [X] `Data` layer is clearly stated using language terms only (no database, no file)
 - [X] `Data` API is clearly stated
 - [X] `Data` API is abstract
