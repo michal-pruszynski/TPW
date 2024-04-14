@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TPW.Interfaces;
-using TPW.Models;
+using TPWA.Interfaces;
+using TPWA.Models;
 
-namespace TPW.Dane
+namespace TPWA.Data
 {
     public class BallRepository : IBallRepository
     {

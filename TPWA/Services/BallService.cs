@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TPW.Interfaces;
-using TPW.Models;
+using TPWA.Interfaces;
+using TPWA.Models;
 
-namespace TPW.Services
+namespace TPWA.Services
 {
     public class BallService : IBallService
     {
-        private readonly IBallRepository _ballRepository;
         private readonly Random _random = new Random();
+        private readonly List<Ball> _balls = new List<Ball>();
+        private readonly IBallRepository _ballRepository;
 
         public BallService(IBallRepository ballRepository)
         {
@@ -30,13 +31,13 @@ namespace TPW.Services
                     VelocityX = _random.NextDouble() * 2 - 1, // Random velocity between -1 and 1
                     VelocityY = _random.NextDouble() * 2 - 1  // Random velocity between -1 and 1
                 };
-                _ballRepository.AddBall(ball);
+                _balls.Add(ball);
             }
         }
 
         public List<Ball> GetAllBalls()
         {
-            return _ballRepository.GetAllBalls();
+            return _balls;
         }
     }
 }

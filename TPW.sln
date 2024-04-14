@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPW", "TPWN\TPW.csproj", "{D869B6D8-E61E-4133-AB88-DE146C0EB6B2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPWA", "TPWA\TPWA.csproj", "{CCB09736-8B81-497A-836F-0F6469251E91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D869B6D8-E61E-4133-AB88-DE146C0EB6B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D869B6D8-E61E-4133-AB88-DE146C0EB6B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D869B6D8-E61E-4133-AB88-DE146C0EB6B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D869B6D8-E61E-4133-AB88-DE146C0EB6B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCB09736-8B81-497A-836F-0F6469251E91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCB09736-8B81-497A-836F-0F6469251E91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCB09736-8B81-497A-836F-0F6469251E91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCB09736-8B81-497A-836F-0F6469251E91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

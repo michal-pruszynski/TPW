@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TPW.Models;
+using TPWA.Models;
 
-namespace TPW.Interfaces
+namespace TPWA.Interfaces
 {
-    public interface IBallRepository
+    public interface IBallService
     {
+        void CreateRandomBalls(int count, double canvasWidth, double canvasHeight);
         List<Ball> GetAllBalls();
-        void AddBall(Ball ball);
-        void RemoveBall(Ball ball);
     }
 }
