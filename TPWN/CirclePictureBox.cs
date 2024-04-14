@@ -10,13 +10,21 @@ namespace TPW.Forms
 {
     public class CirclePictureBox : PictureBox
     {
-        protected override void OnPaint(PaintEventArgs pe)
+        public CirclePictureBox()
         {
-            base.OnPaint(pe);
-            Graphics g = pe.Graphics;
-            using (Pen pen = new Pen(Color.Black, 2))
+            // Set the style to double-buffered to improve drawing performance
+            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.DoubleBuffer, true);
+            BackColor = Color.Transparent;
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+
+            using (var pen = new Pen(Color.Blue, 2)) // Change color and thickness as needed
             {
-                g.DrawEllipse(pen, 0, 0, Width - 1, Height - 1);
+                var diameter = Math.Min(Width, Height);
+                e.Graphics.DrawEllipse(pen, 0, 0, diameter, diameter);
             }
         }
     }

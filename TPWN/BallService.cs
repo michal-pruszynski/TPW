@@ -26,7 +26,9 @@ namespace TPW.Services
                 {
                     X = _random.NextDouble() * canvasWidth,
                     Y = _random.NextDouble() * canvasHeight,
-                    Diameter = _random.Next(20, 50)
+                    Diameter = _random.Next(20, 50),
+                    VelocityX = _random.NextDouble() * 2 - 1, // Random velocity between -1 and 1
+                    VelocityY = _random.NextDouble() * 2 - 1  // Random velocity between -1 and 1
                 };
                 _ballRepository.AddBall(ball);
             }
