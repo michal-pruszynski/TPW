@@ -17,15 +17,15 @@ namespace TPW.Forms
     public partial class MainForm : Form
     {
         private readonly IBallService _ballService;
-        private const int CanvasWidth = 800;  // Canvas width
-        private const int CanvasHeight = 450; // Canvas height
+        private const int CanvasWidth = 800; 
+        private const int CanvasHeight = 450; 
 
         public MainForm()
         {
             InitializeComponent();
-            IBallRepository ballRepository = new BallRepository(); // Instantiate the Data layer
-            _ballService = new BallService(ballRepository); // Instantiate the Logic layer
-            CreateRandomBalls(5); // Example: Create some balls initially
+            IBallRepository ballRepository = new BallRepository();
+            _ballService = new BallService(ballRepository);
+            CreateRandomBalls(5); 
             DisplayBalls();
         }
 
@@ -45,14 +45,12 @@ namespace TPW.Forms
 
         private void DrawBall(Ball ball)
         {
-            // Here you can draw the ball on the form
-            // This is a simple example, adjust as needed
             var circle = new CirclePictureBox
             {
                 Location = new System.Drawing.Point((int)ball.X, (int)ball.Y),
                 Size = new System.Drawing.Size((int)ball.Diameter, (int)ball.Diameter),
                 BackColor = System.Drawing.Color.Blue,
-                BorderStyle = BorderStyle.FixedSingle // Add border for visibility
+                BorderStyle = BorderStyle.FixedSingle
             };
 
             canvasPanel.Controls.Add(circle);
