@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TPW.Properties
+namespace PW.Properties
 {
 
 
