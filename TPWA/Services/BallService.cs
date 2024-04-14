@@ -29,7 +29,7 @@ namespace TPWA.Services
                     Y = _random.NextDouble() * canvasHeight,
                     Diameter = _random.Next(20, 50),
                     VelocityX = _random.NextDouble() * 2 - 1, // Random velocity between -1 and 1
-                    VelocityY = _random.NextDouble() * 2 - 1  // Random velocity between -1 and 1
+                    VelocityY = _random.NextDouble() * 2 - 1
                 };
                 _balls.Add(ball);
             }

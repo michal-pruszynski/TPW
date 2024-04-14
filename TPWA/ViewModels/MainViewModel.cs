@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Threading;
 using TPWA.Data;
 using TPWA.Interfaces;
 using TPWA.Models;
@@ -15,13 +12,21 @@ namespace TPWA.ViewModels
     public class MainViewModel : ViewModelBase
     {
         private readonly IBallService _ballService;
+        private readonly DispatcherTimer _timer;
         private ObservableCollection<Ball> _balls = new ObservableCollection<Ball>();
 
         public MainViewModel()
         {
-            IBallRepository ballRepository = new BallRepository(); // Instantiate the Data layer if needed
-            _ballService = new BallService(ballRepository); // Instantiate the Logic layer
+            IBallRepository ballRepository = new BallRepository();
+            _ballService = new BallService(ballRepository); 
+
             CreateRandomBallsCommand = new RelayCommand(CreateRandomBalls);
+
+            _timer = new DispatcherTimer();
+            _timer.Interval = TimeSpan.FromMilliseconds(30); // Update interval
+            _timer.Tick += Timer_Tick;
+            _timer.Start();
+            CreateRandomBalls();
         }
 
         public ICommand CreateRandomBallsCommand { get; }
@@ -36,10 +41,13 @@ namespace TPWA.ViewModels
             }
         }
 
+        public double CanvasWidth { get; } = 800;
+        public double CanvasHeight { get; } = 450;
+
         private void CreateRandomBalls()
         {
             Balls.Clear();
-            _ballService.CreateRandomBalls(5, CanvasWidth, CanvasHeight);
+            _ballService.CreateRandomBalls(2, CanvasWidth, CanvasHeight);
             var balls = _ballService.GetAllBalls();
             foreach (var ball in balls)
             {
@@ -47,7 +55,31 @@ namespace TPWA.ViewModels
             }
         }
 
-        private const double CanvasWidth = 800;  // Canvas width
-        private const double CanvasHeight = 450; // Canvas height
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            UpdateBallPositions();
+        }
+
+        public void UpdateBallPositions()
+        {
+            foreach (var ball in Balls)
+            {
+                ball.X += ball.VelocityX;
+                ball.Y += ball.VelocityY;
+
+                // Reflect the ball if it hits the edges
+                if (ball.X < 0 || ball.X > CanvasWidth - ball.Diameter)
+                {
+                    ball.VelocityX = -ball.VelocityX;
+                    ball.X += ball.VelocityX; // Move the ball away from the edge
+                }
+                if (ball.Y < 0 || ball.Y > CanvasHeight - ball.Diameter)
+                {
+                    ball.VelocityY = -ball.VelocityY;
+                    ball.Y += ball.VelocityY; // Move the ball away from the edge
+                }
+            }
+            OnPropertyChanged(nameof(Balls));
+        }
     }
 }
