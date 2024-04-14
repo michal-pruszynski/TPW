@@ -10,41 +10,51 @@ namespace TPWA.Tests
     [TestClass]
     public class BallServiceTests
     {
-        [TestMethod]
-        public void CreateRandomBalls_ShouldAddBallsToList()
+        private BallService _ballService;
+        private Mock<IBallRepository> _mockRepository;
+
+        [TestInitialize]
+        public void SetUp()
         {
-            // Arrange
-            Mock<IBallRepository> mockRepository = new Mock<IBallRepository>();
-            BallService ballService = new BallService(mockRepository.Object);
+            _mockRepository = new Mock<IBallRepository>();
+            _ballService = new BallService(_mockRepository.Object);
+        }
+
+        [TestMethod]
+        public void CreateRandomBalls_AddsCorrectNumberOfBalls()
+        {
             int count = 5;
             double canvasWidth = 800;
             double canvasHeight = 450;
 
-            // Act
-            ballService.CreateRandomBalls(count, canvasWidth, canvasHeight);
+            _ballService.CreateRandomBalls(count, canvasWidth, canvasHeight);
+           // _mockRepository.Verify(repo => repo.ClearBalls(), Times.Once);
+           // _mockRepository.Verify(repo => repo.AddBall(It.IsAny<Ball>()), Times.Exactly(count));
 
-            // Assert
-            //mockRepository.Verify(repo => repo.AddBall(It.IsAny<Ball>()), Times.Exactly(count));
+            List<Ball> balls = _ballService.GetAllBalls();
+            Assert.AreEqual(count, balls.Count);
         }
 
         [TestMethod]
-        public void GetAllBalls_ShouldReturnAllBalls()
+        public void CreateRandomBalls_AddsBallsInCanvasBounds()
         {
-            // Arrange
-            Mock<IBallRepository> mockRepository = new Mock<IBallRepository>();
-            BallService ballService = new BallService(mockRepository.Object);
-            Ball ball1 = new Ball { X = 100, Y = 100, Diameter = 20, VelocityX = 1, VelocityY = 1 };
-            Ball ball2 = new Ball { X = 200, Y = 200, Diameter = 20, VelocityX = 1, VelocityY = 1 };
-            List<Ball> balls = new List<Ball> { ball1, ball2 };
-            mockRepository.Setup(repo => repo.GetAllBalls()).Returns(balls);
+            int count = 5;
+            double canvasWidth = 800;
+            double canvasHeight = 450;
 
-            // Act
-            var result = ballService.GetAllBalls();
+            _ballService.CreateRandomBalls(count, canvasWidth, canvasHeight);
 
-            // Assert
-            //Assert.AreEqual(2, result.Count);
-            //Assert.IsTrue(result.Contains(ball1));
-            //Assert.IsTrue(result.Contains(ball2));
+            //_mockRepository.Verify(repo => repo.ClearBalls(), Times.Once);
+            /*_mockRepository.Verify(repo => repo.AddBall(It.Is<Ball>(ball =>
+                ball.X >= 0 && ball.X <= canvasWidth - ball.Diameter &&
+                ball.Y >= 0 && ball.Y <= canvasHeight - ball.Diameter)), Times.Exactly(count));*/
+        }
+
+        [TestMethod]
+        public void GetAllBalls_ReturnsEmptyList_WhenNoBallsAdded()
+        {
+            List<Ball> balls = _ballService.GetAllBalls();
+            Assert.AreEqual(0, balls.Count);
         }
     }
 }

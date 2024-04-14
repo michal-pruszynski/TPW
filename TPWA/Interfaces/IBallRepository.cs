@@ -9,8 +9,8 @@ namespace TPWA.Interfaces
 {
     public interface IBallRepository
     {
-        List<Ball> GetAllBalls();
+        List<Ball> GetBalls();
         void AddBall(Ball ball);
-        void RemoveBall(Ball ball);
+        void ClearBalls();
     }
 }

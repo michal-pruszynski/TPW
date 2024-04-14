@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows.Threading;
-using TPWA.Data;
 using TPWA.Interfaces;
 using TPWA.Models;
 using TPWA.Services;
@@ -17,15 +16,19 @@ namespace TPWA.ViewModels
 
         public MainViewModel()
         {
-            IBallRepository ballRepository = new BallRepository();
-            _ballService = new BallService(ballRepository); 
+            IBallRepository ballRepository = new BallRepository(); // Instantiate the Data layer
+            _ballService = new BallService(ballRepository); // Instantiate the Logic layer
 
-            CreateRandomBallsCommand = new RelayCommand(CreateRandomBalls);
+            CreateRandomBallsCommand = new RelayCommand(CreateRandomBall);
 
             _timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromMilliseconds(30); // Update interval
             _timer.Tick += Timer_Tick;
+
+            // Start timer when MainViewModel is created
             _timer.Start();
+
+            // Create random balls on startup
             CreateRandomBalls();
         }
 
@@ -44,10 +47,19 @@ namespace TPWA.ViewModels
         public double CanvasWidth { get; } = 800;
         public double CanvasHeight { get; } = 450;
 
-        private void CreateRandomBalls()
+        public void CreateRandomBalls()
         {
             Balls.Clear();
-            _ballService.CreateRandomBalls(2, CanvasWidth, CanvasHeight);
+            _ballService.CreateRandomBalls(3, CanvasWidth, CanvasHeight);
+            var balls = _ballService.GetAllBalls();
+            foreach (var ball in balls)
+            {
+                Balls.Add(ball);
+            }
+        }
+        private void CreateRandomBall()
+        {
+            _ballService.CreateRandomBalls(1, CanvasWidth, CanvasHeight);
             var balls = _ballService.GetAllBalls();
             foreach (var ball in balls)
             {
@@ -55,12 +67,12 @@ namespace TPWA.ViewModels
             }
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
+        public void Timer_Tick(object sender, EventArgs e)
         {
             UpdateBallPositions();
         }
 
-        public void UpdateBallPositions()
+        private void UpdateBallPositions()
         {
             foreach (var ball in Balls)
             {
@@ -76,10 +88,10 @@ namespace TPWA.ViewModels
                 if (ball.Y < 0 || ball.Y > CanvasHeight - ball.Diameter)
                 {
                     ball.VelocityY = -ball.VelocityY;
-                    ball.Y += ball.VelocityY; // Move the ball away from the edge
+                    ball.Y += ball.VelocityY;
                 }
             }
-            OnPropertyChanged(nameof(Balls));
+            OnPropertyChanged(nameof(Balls)); // Notifyz of property change
         }
     }
 }

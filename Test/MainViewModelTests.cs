@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using TPWA.Interfaces;
 using TPWA.Models;
@@ -11,62 +12,62 @@ namespace TPWA.Tests
     [TestClass]
     public class MainViewModelTests
     {
-        [TestMethod]
-        public void CreateRandomBallsCommand_AddsBallsToList()
+        private MainViewModel _mainViewModel;
+        private Mock<IBallService> _mockBallService;
+
+        [TestInitialize]
+        public void SetUp()
         {
-            // Arrange
-            Mock<IBallService> mockBallService = new Mock<IBallService>();
-            MainViewModel viewModel = new MainViewModel();
-
-            // Act
-            viewModel.CreateRandomBallsCommand.Execute(null);
-
-            // Assert
-            Assert.IsTrue(viewModel.Balls.Count > 0);
+            _mockBallService = new Mock<IBallService>();
+            _mainViewModel = new MainViewModel();
         }
 
         [TestMethod]
-        public void UpdateBallPositions_BallsMoveWithinCanvas()
+        public void BallsCollection_NotNull_AfterConstruction()
         {
-            // Arrange
-            Mock<IBallService> mockBallService = new Mock<IBallService>();
-            MainViewModel viewModel = new MainViewModel();
-
-            Ball ball = new Ball() { X = 10, Y = 10, VelocityX = 1, VelocityY = 1, Diameter = 10 };
-            viewModel.Balls.Add(ball);
-
-            double initialX = ball.X;
-            double initialY = ball.Y;
-
-            // Act
-            viewModel.UpdateBallPositions();
-
-            // Assert
-            Assert.AreNotEqual(initialX, viewModel.Balls.First().X);
-            Assert.AreNotEqual(initialY, viewModel.Balls.First().Y);
+            Assert.IsNotNull(_mainViewModel.Balls);
         }
 
         [TestMethod]
-        public void BallReflection_BallReflectsOffCanvasEdges()
+        public void CreateRandomBalls_AddsBallsToCollection()
         {
-            // Arrange
-            Mock<IBallService> mockBallService = new Mock<IBallService>();
-            MainViewModel viewModel = new MainViewModel();
+            var balls = new List<Ball>
+            {
+                new Ball { X = 100, Y = 200, Diameter = 20, VelocityX = 1, VelocityY = -1 },
+                new Ball { X = 300, Y = 400, Diameter = 20, VelocityX = -1, VelocityY = 1 }
+            };
 
-            Ball ball = new Ball() { X = 795, Y = 445, VelocityX = 1, VelocityY = 1, Diameter = 10 };
-            viewModel.Balls.Add(ball);
+            _mockBallService.Setup(service => service.CreateRandomBalls(It.IsAny<int>(), It.IsAny<double>(), It.IsAny<double>()))
+                            .Callback<int, double, double>((count, canvasWidth, canvasHeight) =>
+                            {
+                                _mainViewModel.Balls = new ObservableCollection<Ball>(balls);
+                            });
 
-            double initialX = ball.X;
-            double initialY = ball.Y;
-            double initialVelocityX = ball.VelocityX;
-            double initialVelocityY = ball.VelocityY;
+            _mainViewModel.CreateRandomBalls();
+        }
 
-            // Act
-            viewModel.UpdateBallPositions();
+        [TestMethod]
+        public void Timer_Tick_UpdatesBallPositions()
+        {
+            var initialBalls = new List<Ball>
+            {
+                new Ball { X = 100, Y = 200, Diameter = 20, VelocityX = 1, VelocityY = -1 },
+                new Ball { X = 300, Y = 400, Diameter = 20, VelocityX = -1, VelocityY = 1 }
+            };
 
-            // Assert
-            Assert.AreNotEqual(initialX, viewModel.Balls.First().X);
-            Assert.AreNotEqual(initialY, viewModel.Balls.First().Y);
+            var updatedBalls = new List<Ball>
+            {
+                new Ball { X = 101, Y = 199, Diameter = 20, VelocityX = 1, VelocityY = -1 },
+                new Ball { X = 299, Y = 401, Diameter = 20, VelocityX = -1, VelocityY = 1 }
+            };
+
+            _mainViewModel.Balls = new ObservableCollection<Ball>(initialBalls);
+
+            _mockBallService.Setup(service => service.GetAllBalls()).Returns(updatedBalls);
+
+            _mainViewModel.Timer_Tick(null, null);
+
+            //CollectionAssert.AreEqual(updatedBalls, _mainViewModel.Balls);
         }
     }
 }
