@@ -26,7 +26,7 @@ ETAP - 1
 - [X] `Presentation` - object model representing process data
 - [X] Fulfill functional requirements of the task
 - [X] Unit Test - layers are tested independently using abstract API
-- [ ] Dependency injection (additional framework is not required)
+- [X] Dependency injection (additional framework is not required)
 - [X] Mock is used for testing purposes (expected but not required)
 
 ETAP - 0
