@@ -25,9 +25,9 @@ ETAP - 1
 - [X] reactive and interactive programming is used for the communication of layers 
 - [X] `Presentation` - object model representing process data
 - [X] Fulfill functional requirements of the task
-- [ ] Unit Test - layers are tested independently using abstract API
+- [X] Unit Test - layers are tested independently using abstract API
 - [ ] Dependency injection (additional framework is not required)
-- [ ] Mock is used for testing purposes (expected but not required)
+- [X] Mock is used for testing purposes (expected but not required)
 
 ETAP - 0
 - [X] the task provides required feedback and has been submitted (needs grading)
