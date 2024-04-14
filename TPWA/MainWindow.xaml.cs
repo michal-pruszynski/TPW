@@ -22,7 +22,7 @@ namespace TPWA
     {
         public MainWindow()
         {
-            //InitializeComponent();
+            InitializeComponent();
         }
     }
 }

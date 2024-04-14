@@ -6,30 +6,25 @@ using System.Threading.Tasks;
 using TPWA.Interfaces;
 using TPWA.Models;
 
-namespace TPWA.Data
+namespace TPWA.Services
 {
     public class BallRepository : IBallRepository
     {
-        private List<Ball> Balls { get; }
+        private List<Ball> _balls = new List<Ball>();
 
-        public BallRepository()
+        public List<Ball> GetBalls()
         {
-            Balls = new List<Ball>();
-        }
-
-        public List<Ball> GetAllBalls()
-        {
-            return Balls;
+            return _balls;
         }
 
         public void AddBall(Ball ball)
         {
-            Balls.Add(ball);
+            _balls.Add(ball);
         }
 
-        public void RemoveBall(Ball ball)
+        public void ClearBalls()
         {
-            Balls.Remove(ball);
+            _balls.Clear();
         }
     }
 }
