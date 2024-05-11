@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using TPWA.Interfaces;
 using TPWA.Models;
 
@@ -25,8 +26,8 @@ namespace TPWA.Services
             {
                 var ball = new Ball
                 {
-                    X = _random.NextDouble() * canvasWidth,
-                    Y = _random.NextDouble() * canvasHeight,
+                    X = _random.NextDouble() * (canvasWidth-50),
+                    Y = _random.NextDouble() * (canvasHeight-50),
                     Diameter = _random.Next(20, 50),
                     VelocityX = _random.NextDouble() * 2 - 1, // Random velocity between -1 and 1
                     VelocityY = _random.NextDouble() * 2 - 1
@@ -39,5 +40,7 @@ namespace TPWA.Services
         {
             return _balls;
         }
+
+
     }
 }

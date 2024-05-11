@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows.Threading;
+using TPWA.Data;
 using TPWA.Interfaces;
 using TPWA.Models;
 using TPWA.Services;
@@ -22,7 +23,7 @@ namespace TPWA.ViewModels
             CreateRandomBallsCommand = new RelayCommand(CreateRandomBall);
 
             _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromMilliseconds(30); // Update interval
+            _timer.Interval = TimeSpan.FromMilliseconds(1); // Update interval
             _timer.Tick += Timer_Tick;
 
             // Start timer when MainViewModel is created

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:TPWA.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="524" Width="837">
 
     <Window.DataContext>
         <vm:MainViewModel />
@@ -14,10 +14,11 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition/>
+            <RowDefinition Height="0*"/>
         </Grid.RowDefinitions>
 
-        <Button Grid.Row="0" Content="Add Balls" Command="{Binding CreateRandomBallsCommand}" Margin="5"/>
+        <Button Grid.Row="0" Content="Add Balls" Command="{Binding CreateRandomBallsCommand}" Margin="5,5,5,5"/>
 
         <ItemsControl Grid.Row="1" ItemsSource="{Binding Balls}">
             <ItemsControl.ItemsPanel>

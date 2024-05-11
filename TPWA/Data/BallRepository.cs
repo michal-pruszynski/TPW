@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using TPWA.Interfaces;
 using TPWA.Models;
 
-namespace TPWA.Services
+namespace TPWA.Data
 {
     public class BallRepository : IBallRepository
     {
@@ -26,5 +27,6 @@ namespace TPWA.Services
         {
             _balls.Clear();
         }
+
     }
 }
