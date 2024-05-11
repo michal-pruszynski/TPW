@@ -14,17 +14,34 @@ namespace TPWA.Models
         private double _velocityX;
         private double _velocityY;
         private double _diameter;
-
+        private double _mass;
+        private double _velocityPX;
+        private double _velocityPY;
         public double X
         {
             get { return _x; }
             set { _x = value; OnPropertyChanged(); }
         }
-
         public double Y
         {
             get { return _y; }
             set { _y = value; OnPropertyChanged(); }
+        }
+
+        public double Mass
+        {
+            get { return _mass; }
+            set { _mass = value; OnPropertyChanged(); }
+        }
+        public double PreviousVelocityX
+        {
+            get { return _velocityPX; }
+            set { _velocityPX = value; OnPropertyChanged(); }
+        }
+        public double PreviousVelocityY
+        {
+            get { return _velocityPY; }
+            set { _velocityPY = value; OnPropertyChanged(); }
         }
 
         public double VelocityX
@@ -38,7 +55,6 @@ namespace TPWA.Models
             get { return _velocityY; }
             set { _velocityY = value; OnPropertyChanged(); }
         }
-
         public double Diameter
         {
             get { return _diameter; }

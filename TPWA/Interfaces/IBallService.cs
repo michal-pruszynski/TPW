@@ -9,6 +9,7 @@ namespace TPWA.Interfaces
 {
     public interface IBallService
     {
+        Task UpdateBallPositionsAsync(double canvasWidth, double canvasHeight);
         void CreateRandomBalls(int count, double canvasWidth, double canvasHeight);
         List<Ball> GetAllBalls();
     }

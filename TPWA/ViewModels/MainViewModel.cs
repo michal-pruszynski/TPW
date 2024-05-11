@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Threading;
 using TPWA.Interfaces;
@@ -69,29 +70,15 @@ namespace TPWA.ViewModels
 
         public void Timer_Tick(object sender, EventArgs e)
         {
-            UpdateBallPositions();
+            //UpdateBallPositions();
+            _ = UpdateBallsAsync();
         }
-
-        private void UpdateBallPositions()
+        public async Task UpdateBallsAsync()
         {
-            foreach (var ball in Balls)
+            await Task.Run(async () =>
             {
-                ball.X += ball.VelocityX;
-                ball.Y += ball.VelocityY;
-
-                // Reflect the ball if it hits the edges
-                if (ball.X < 0 || ball.X > CanvasWidth - ball.Diameter)
-                {
-                    ball.VelocityX = -ball.VelocityX;
-                    ball.X += ball.VelocityX; // Move the ball away from the edge
-                }
-                if (ball.Y < 0 || ball.Y > CanvasHeight - ball.Diameter)
-                {
-                    ball.VelocityY = -ball.VelocityY;
-                    ball.Y += ball.VelocityY;
-                }
-            }
-            OnPropertyChanged(nameof(Balls)); // Notifyz of property change
+                await _ballService.UpdateBallPositionsAsync(CanvasWidth, CanvasHeight);
+            });
         }
     }
 }
