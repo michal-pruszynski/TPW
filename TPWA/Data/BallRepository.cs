@@ -7,7 +7,7 @@ using System.Windows;
 using TPWA.Interfaces;
 using TPWA.Models;
 
-namespace TPWA.Data
+namespace TPWA.Services
 {
     public class BallRepository : IBallRepository
     {
