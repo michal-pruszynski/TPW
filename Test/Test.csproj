@@ -56,6 +56,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BallBalisticsTest.cs" />
     <Compile Include="BallRepositoryTests.cs" />
     <Compile Include="BallServiceTests.cs" />
     <Compile Include="MainViewModelTests.cs" />
