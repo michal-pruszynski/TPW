@@ -62,7 +62,7 @@ namespace TPWA.Services
                 }
             });
         }
-        private void AdjustVelocityForBallCollision(Ball ball)
+        public void AdjustVelocityForBallCollision(Ball ball)
         {
             foreach (var otherBall in _balls)
             {
@@ -92,7 +92,7 @@ namespace TPWA.Services
                 }
             }
         }
-        private void AdjustVelocityForWallCollision(Ball ball, double canvasWidth, double canvasHeight)
+        public void AdjustVelocityForWallCollision(Ball ball, double canvasWidth, double canvasHeight)
         {
             // Left and right wall
             if (ball.X - ball.Diameter < 0 || ball.X + ball.Diameter > canvasWidth)
