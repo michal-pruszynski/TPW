@@ -26,9 +26,9 @@ namespace TPWA.Services
             {
                 var ball = new Ball
                 {
-                    X = _random.NextDouble() * (canvasWidth - 50),
-                    Y = _random.NextDouble() * (canvasHeight - 50),
-                    Diameter = _random.Next(20, 50),
+                    X = _random.NextDouble() * (canvasWidth-50),
+                    Y = _random.NextDouble() * (canvasHeight-50),
+                    Diameter = _random.Next(30, 45),
                     VelocityX = _random.NextDouble() * 2 - 1, // Random velocity between -1 and 1
                     VelocityY = _random.NextDouble() * 2 - 1
                 };
@@ -112,7 +112,7 @@ namespace TPWA.Services
             double dx = ball1.X - ball2.X;
             double dy = ball1.Y - ball2.Y;
             double distance = Math.Sqrt(dx * dx + dy * dy);
-            return distance < ((ball1.Diameter / 2) + (ball2.Diameter) / 2);
+            return distance < ((ball1.Diameter / 2)+0.5 + (ball2.Diameter / 2)+0.5);
         }
 
     }
