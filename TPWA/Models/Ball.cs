@@ -9,6 +9,7 @@ namespace TPWA.Models
 {
     public class Ball : ViewModelBase
     {
+        private int _id;
         private double _x;
         private double _y;
         private double _velocityX;
@@ -17,6 +18,11 @@ namespace TPWA.Models
         private double _mass;
         private double _velocityPX;
         private double _velocityPY;
+        public int Id
+        {
+            get { return _id; }
+            set { _id = value; OnPropertyChanged(); }
+        }
         public double X
         {
             get { return _x; }

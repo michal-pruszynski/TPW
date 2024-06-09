@@ -75,6 +75,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Data\BallRepository.cs" />
+    <Compile Include="Data\DiagnosticsLogger.cs" />
     <Compile Include="Interfaces\IBallRepository.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
     <Compile Include="Services\BallService.cs" />
