@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="BallBalisticsTest.cs" />
     <Compile Include="BallRepositoryTests.cs" />
+    <Compile Include="DiagnosticsLoggerTests.cs" />
     <Compile Include="MainViewModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
