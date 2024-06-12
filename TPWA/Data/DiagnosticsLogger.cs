@@ -1,7 +1,7 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace TPWA.Data
 {
@@ -9,13 +9,16 @@ namespace TPWA.Data
     {
         private readonly ConcurrentQueue<string> _logQueue = new ConcurrentQueue<string>();
         private readonly string _filePath;
-        private readonly Task _loggingTask;
-        private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+        private readonly DispatcherTimer _timer;
 
         public DiagnosticsLogger(string filePath)
         {
             _filePath = filePath;
-            _loggingTask = Task.Run(ProcessLogQueue);
+
+            _timer = new DispatcherTimer();
+            _timer.Interval = TimeSpan.FromSeconds(5); // Adjust interval as needed
+            _timer.Tick += Timer_Tick;
+            _timer.Start();
         }
 
         public void Log(string message)
@@ -23,24 +26,20 @@ namespace TPWA.Data
             _logQueue.Enqueue(message);
         }
 
-        private async Task ProcessLogQueue()
+        private void Timer_Tick(object sender, EventArgs e)
         {
             using (var streamWriter = new StreamWriter(_filePath, true))
             {
-                while (!_cancellationTokenSource.Token.IsCancellationRequested)
+                while (_logQueue.TryDequeue(out string logMessage))
                 {
-                    while (_logQueue.TryDequeue(out string logMessage))
-                    {
-                        await streamWriter.WriteLineAsync(logMessage);
-                    }
-                    await Task.Delay(100); // Adjust delay as needed
+                    streamWriter.WriteLine(logMessage);
                 }
             }
         }
 
         public void Stop()
         {
-            _cancellationTokenSource.Cancel();
+            _timer.Stop();
         }
     }
 }
