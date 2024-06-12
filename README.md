@@ -8,6 +8,33 @@
 | MS                      | `e7e52d02-af97-4a39-8b51-0a6180b22eaa` |
 
 ## Create a repository checklist
+ETAP - 3
+- [X] **Starting point**
+  - [X] text is in C#
+  - [X] all UT are green
+  - [X] the program behaves as expected (intermediate approval test)
+- [X] **Data Layer**
+  - [X] responsibility of this layer is
+    - [X] to represent boundaries of the movement rectangle if necessary
+    - [X] implement balls behavior as self-contained independent entities
+    - [X] save diagnostic data to a file
+  - [X] protect balls velocity against any influence from other balls and the environmental behavior
+  - [X] balls implementation uses concurrent programming
+  - [X] prove that the diagnostic logging doesn't have an impact on the behavior of the balls
+- [X] **Logic Layer**
+  - [X] responsibility of this layer is to manage movement rectangle boundaries and balls interaction (collisions)
+  - [X] prove that the protection of data (balls position on the abstract table during collisions detection) integration is implemented
+  - [X] `Logic` uses only the abstract `Data` layer API
+- [X] **Presentation Layer (MVVM)**
+  - [X] responsibility of this layer is to manage the graphical user interface (GUI)
+  - [X] user => GUI interoperability must be implemented using interactive programming only
+  - [X] GUI => the user interoperability must be implemented using reactive programming only (timer is not allowed)
+  - [X] interoperability of the GUI and underlying layers must be synchronized
+  - [X] prove that the protection of data (balls position on the screen) integration is implemented
+- [X] **Testing**
+  - [X] Unit Test - layers are tested independently using dependency injection (additional framework is not required)
+  - [X] Mock may be used for testing purposes (expected but not required)
+
 ETAP - 2
 - [X] **Starting point**
   - [X] text is in C#
